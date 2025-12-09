@@ -1,8 +1,6 @@
 import {
-  Hero,
   ServiceGrid,
   ProcessSteps,
-  SDVOSBBadge,
   Button,
   Section,
   getBrandColors,
@@ -10,6 +8,7 @@ import {
   type ProcessStep,
 } from '@shared/ui';
 import Link from 'next/link';
+import { HeroSection } from '@/components/HeroSection';
 
 const brand = 'ibms';
 const colors = getBrandColors(brand);
@@ -66,22 +65,8 @@ const differentiators = [
 export default function HomePage() {
   return (
     <>
-      {/* Hero Section */}
-      <Hero
-        brand={brand}
-        title="Innovation Building Management"
-        subtitle="Service Disabled Veteran-Owned Construction Management Excellence"
-        backgroundImage="/api/placeholder/1920/1080"
-      >
-        <div className="flex flex-col items-center gap-6">
-          <SDVOSBBadge brand={brand} />
-          <Link href="/contact">
-            <Button brand={brand} size="lg">
-              Request a Project Consultation
-            </Button>
-          </Link>
-        </div>
-      </Hero>
+      {/* Hero Section with full-width background */}
+      <HeroSection />
 
       {/* Credibility Section */}
       <Section brand={brand} className="py-12">
@@ -148,5 +133,6 @@ export default function HomePage() {
     </>
   );
 }
+
 
 
