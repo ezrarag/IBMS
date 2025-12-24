@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import { usePathname } from "next/navigation"
 import Link from "next/link"
 import Image from "next/image"
 import { Plus, Menu, X } from "lucide-react"
@@ -23,10 +24,16 @@ const navItems = [
 ]
 
 export function Navigation() {
+  const pathname = usePathname()
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isLoginOpen, setIsLoginOpen] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+
+  // Don't render navigation on auth page
+  if (pathname === '/auth') {
+    return null
+  }
 
   useEffect(() => {
     const handleScroll = () => {
