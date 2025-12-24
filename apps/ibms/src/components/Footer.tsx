@@ -1,3 +1,6 @@
+'use client';
+
+import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { getBrandColors } from '@shared/ui';
 
@@ -5,7 +8,13 @@ const brand = 'ibms';
 const colors = getBrandColors(brand);
 
 export function Footer() {
+  const pathname = usePathname();
   const currentYear = new Date().getFullYear();
+
+  // Don't render footer on auth page
+  if (pathname === '/auth') {
+    return null;
+  }
 
   return (
     <footer
