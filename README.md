@@ -57,6 +57,7 @@ npm run dev
 
 ## Features
 
+- **Password Protection**: Site is protected by password authentication - see [Site Access](#site-access) section
 - **Shared UI Library**: Reusable components with brand theming
 - **Brand Kit**: Centralized brand configuration (IBMS uses darker, industrial theme)
 - **Responsive Design**: Mobile-first, accessible design
@@ -106,6 +107,30 @@ Submit a lead/contact form submission.
 - `npm run build` - Build for production
 - `npm run lint` - Run linter
 - `npm run type-check` - TypeScript type checking
+
+## Site Access
+
+The site is protected by password authentication. Visitors must enter a password to access any page on the site.
+
+### Passwords
+
+**Admin Password**: `admin123` (for site owner)
+**Temp Password**: `temp123` (for temporary access that can be shared)
+
+**Note**: These are default passwords. In production, set these via environment variables:
+- `ADMIN_PASSWORD` - Admin password for site owner
+- `TEMP_PASSWORD` - Temporary password for shared access
+
+Unauthorized users (those without a valid password) will be redirected to `https://readyaimgo.biz` after attempting to access the site.
+
+### How It Works
+
+1. All pages are protected by middleware that checks for an authentication cookie
+2. Unauthenticated users are redirected to `/auth` page
+3. Users enter password on `/auth` page
+4. Password is verified against `ADMIN_PASSWORD` or `TEMP_PASSWORD` environment variables
+5. Valid passwords set an authentication cookie (valid for 30 days)
+6. Invalid passwords trigger redirect to `https://readyaimgo.biz`
 
 ## Tech Stack
 
