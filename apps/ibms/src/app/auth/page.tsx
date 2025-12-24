@@ -1,10 +1,10 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Button } from '@shared/ui';
 
-export default function AuthPage() {
+function AuthForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [password, setPassword] = useState('');
@@ -110,6 +110,27 @@ export default function AuthPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function AuthPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 px-4">
+        <div className="w-full max-w-md">
+          <div className="bg-slate-800 rounded-lg shadow-xl p-8 border border-slate-700">
+            <div className="text-center">
+              <h1 className="text-3xl font-bold text-white mb-2">
+                Site Access Required
+              </h1>
+              <p className="text-slate-400">Loading...</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    }>
+      <AuthForm />
+    </Suspense>
   );
 }
 
